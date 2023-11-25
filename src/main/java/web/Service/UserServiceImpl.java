@@ -3,7 +3,6 @@ package web.Service;
 import org.springframework.stereotype.Service;
 import web.Dao.UserDao;
 import web.model.User;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
