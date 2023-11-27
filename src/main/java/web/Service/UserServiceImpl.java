@@ -21,7 +21,6 @@ public class UserServiceImpl implements UserService {
         userDao.add(user);
     }
 
-    @Transactional
     @Override
     public List<User> listUsers() {
         return userDao.listUsers();
@@ -37,15 +36,19 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public void updateUser(User userinfo, long id) {
-        userDao.updateUser(userinfo, id);
+        User old = userDao.readUser(id);
+        old.setLastName(userinfo.getLastName());
+        old.setFirstName(userinfo.getFirstName());
+        old.setEmail(userinfo.getEmail());
+        userDao.updateUser(old);
     }
 
-    @Transactional
     @Override
     public User readUser(long id) {
         return userDao.readUser(id);
     }
 
+    @Transactional
     @Override
     public void initialAddUser() {
         userDao.initialAddUser();
