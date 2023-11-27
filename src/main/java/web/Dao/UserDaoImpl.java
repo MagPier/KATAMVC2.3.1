@@ -15,9 +15,11 @@ public class UserDaoImpl implements UserDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Transactional
+
     @Override
     public void add(User user) {
+
+
         entityManager.persist(user);
         entityManager.flush();
     }
@@ -26,12 +28,12 @@ public class UserDaoImpl implements UserDao {
     public User readUser(long id) {
         return entityManager.find(User.class, id);
     }
-    @Transactional
+
     @Override
     public List<User> listUsers() {
         return entityManager.createQuery("from User", User.class).getResultList();
     }
-    @Transactional
+
     @Override
     public void removeUserById(long id) {
         User user = readUser(id);
@@ -41,7 +43,7 @@ public class UserDaoImpl implements UserDao {
         entityManager.remove(user);
         entityManager.flush();
     }
-    @Transactional
+
     @Override
     public void updateUser(User userinfo,long id) {
       User old =  entityManager.find(User.class, id);
@@ -50,7 +52,7 @@ public class UserDaoImpl implements UserDao {
       old.setEmail(userinfo.getEmail());
       entityManager.flush();
     }
-    @Transactional
+
     @Override
     public void initialAddUser() {
 
